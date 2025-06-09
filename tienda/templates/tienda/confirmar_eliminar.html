@@ -1,0 +1,17 @@
+{% extends 'tienda/base.html' %}
+{% block content %}
+<div class="p-6 bg-white rounded-xl shadow-md text-center">
+    <h2 class="text-xl font-bold text-red-600 mb-4">
+        ¿Estás seguro de que deseas eliminar esta {{ tipo }}: 
+        <span class="text-black font-semibold">{{ obj.nombre }}</span>?
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded">
+            Sí, eliminar
+        </button>
+        <a href="{% url return_url %}" class="ml-4 text-blue-500 hover:underline">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

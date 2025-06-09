@@ -1,0 +1,23 @@
+{% extends 'tienda/base.html' %}
+{% block content %}
+<div class="flex items-center justify-between mb-4">
+    <h2 class="text-2xl font-bold text-blue-800">Lista de Productos</h2>
+    <a href="{% url 'producto_form' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">+ Nuevo Producto</a>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for p in productos %}
+    <div class="bg-white rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition p-4">
+        <img src="{{ p.imagen.url }}" alt="Imagen" class="w-full h-40 object-cover rounded mb-3">
+        <h3 class="text-lg font-bold text-gray-800">{{ p.nombre }}</h3>
+        <p class="text-sm text-gray-600">{{ p.descripcion|truncatechars:60 }}</p>
+        <p class="mt-2 text-blue-700 font-semibold">S/ {{ p.precio }}</p>
+        <p class="text-xs text-gray-500">Categoría: {{ p.categoria.nombre }}</p>
+        <div class="mt-2 flex gap-2">
+            <a href="{% url 'producto_editar' p.id %}" class="text-sm text-white bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded">Editar</a>
+            <a href="{% url 'producto_eliminar' p.id %}" class="text-sm text-white bg-red-600 hover:bg-red-700 px-3 py-1 rounded">Eliminar</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
